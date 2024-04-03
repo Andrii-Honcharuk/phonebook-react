@@ -20,5 +20,5 @@ export default slice.reducer;
 
 export const { filterContactsByName } = slice.actions;
 
-export const selectNameFilter = (state) => state.filters.name;
+
 

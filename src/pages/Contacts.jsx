@@ -12,6 +12,7 @@ import {
 } from "../redux/contacts/selectors";
 import { useEffect } from "react";
 import { fetchContacts } from "../redux/contacts/operations";
+import Loader from "../components/Loader/Loader";
 
 // import style from "./App.module.css";
 
@@ -32,11 +33,11 @@ export default function Contacts() {
 
   return (
     <>
-      <PageTitle>Your contacts</PageTitle>;
+      <PageTitle>Your contacts</PageTitle>
       <ContactForm />
       <SearchBox />
       {error && <p>Error loading</p>}
-      {loading && <p>Loading...</p>}
+      {loading && <Loader />}
       <ContactList />
       <Toaster />
     </>

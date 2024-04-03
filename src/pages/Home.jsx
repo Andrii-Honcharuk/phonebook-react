@@ -1,5 +1,6 @@
 //pages/Home.jsx
 
+import Loader from "../components/Loader/Loader";
 import PageTitle from "../components/PageTitle/PageTitle";
 
 export default function Home() {
@@ -11,6 +12,7 @@ export default function Home() {
           💁‍♀️
         </span>
       </PageTitle>
+
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni
         asperiores eius nobis saepe quis voluptatibus facere expedita tempora,

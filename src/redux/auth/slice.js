@@ -14,6 +14,7 @@ const authSlice = createSlice({
     isRefreshing: false,
     error: null,
   },
+  
   extraReducers: (builder) => builder
     .addCase(register.fulfilled, (state, action) => {
       state.user = action.payload.user;
