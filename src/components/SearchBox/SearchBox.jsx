@@ -5,7 +5,7 @@ import style from "./SearchBox.module.css";
 import {
   filterContactsByName,
   selectNameFilter,
-} from "../../redux/filtersSlice";
+} from "../../redux/filters/slice";
 
 export default function SearchBox() {
   const dispatch = useDispatch();

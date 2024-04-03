@@ -1,7 +1,7 @@
 //Contact.jsx;
 
 import { useDispatch } from "react-redux";
-import { deleteContact } from "../../redux/contactsOps";
+import { deleteContact } from "../../redux/contacts/operations";
 import style from "./Contact.module.css";
 import { HiMiniPhone, HiMiniUser } from "react-icons/hi2";
 

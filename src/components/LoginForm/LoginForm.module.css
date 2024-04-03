@@ -1,0 +1,38 @@
+.form {
+  width: 320px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  margin-top: 16px;
+}
+
+.errorMessage {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  color: red;
+  font-size: 14px;
+  margin: 4px;
+}
+
+.loginBtn {
+  display: block;
+  padding: 4px 16px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 8px;
+}
+.textRegister {
+  text-align: center;
+  text-decoration: underline;
+  color: blue;
+}
+.registerCont {
+  text-align: center;
+  margin-right: auto;
+  margin-left: auto;
+}

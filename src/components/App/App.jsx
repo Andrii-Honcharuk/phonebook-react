@@ -1,44 +1,51 @@
 // App.jsx
 
-
-import ContactForm from "../ContactForm/ContactForm";
-import { useEffect } from "react";
-import ContactList from "../ContactList/ContactList";
-import SearchBox from "../SearchBox/SearchBox";
-
-import style from "./App.module.css";
+import { Suspense, lazy, useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
+import Layout from "../Layout/Layout";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchContacts } from "../../redux/contactsOps";
-import toast, { Toaster } from "react-hot-toast";
-import {
-  selectContactsError,
-  selectContactsLoading,
-} from "../../redux/contactsSlice";
+import { refreshUser } from "../../redux/auth/operations";
+import { selectIsRefreshing } from "../../redux/auth/selectors";
+import { RestrictedRoute } from "../RestrictedRoute";
+import { PrivateRoute } from "../PrivateRoute";
+
+const HomePage = lazy(() => import("../../pages/Home"));
+const RegisterPage = lazy(() => import("../../pages/Register"));
+const LoginPage = lazy(() => import("../../pages/Login"));
+const ContactsPage = lazy(() => import("../../pages/Contacts"));
 
 export default function App() {
   const dispatch = useDispatch();
-  const loading = useSelector(selectContactsLoading);
-  const error = useSelector(selectContactsError);
 
   useEffect(() => {
-    dispatch(fetchContacts())
-      // для обробки UI завантаження
-      .unwrap()
-      .catch(() => {
-        toast.success("Ooops... Error, please reload page");
-      });
-    //---------------
+    dispatch(refreshUser());
   }, [dispatch]);
 
-  return (
-    <div className={style.container}>
-      <h1>Phone book</h1>
-      <ContactForm />
-      <SearchBox />
-      {error && <p>Error loading</p>}
-      {loading && <p>Loading...</p>}
-      <ContactList />
+  const isRefreshing = useSelector(selectIsRefreshing);
+  console.log("isRefreshing", isRefreshing);
+  return isRefreshing ? (
+    <b>Please wait...</b>
+  ) : (
+    <Layout>
+      <Suspense fallback={null}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route
+            path="/register"
+            element={<RestrictedRoute component={<RegisterPage />} />}
+          />
+          <Route
+            path="/login"
+            element={<RestrictedRoute component={<LoginPage />} />}
+          />
+          <Route
+            path="/contacts"
+            element={<PrivateRoute component={<ContactsPage />} />}
+          />
+        </Routes>
+      </Suspense>
       <Toaster />
-    </div>
+    </Layout>
   );
 }
