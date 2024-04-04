@@ -24,9 +24,12 @@ const ContactSchema = Yup.object().shape({
 export default function ContactForm() {
   const dispatch = useDispatch();
   const handleSubmit = (values, actions) => {
-    dispatch(addContact({ name: values.name, number: values.number }))
+    const formattedNumber = values.number.replace(/(\d{1,3})(?=\d{3})/g, "$1-");
+    // console.log(formattedNumber);
+    dispatch(addContact({ name: values.name, number: formattedNumber }))
       .unwrap()
       .then(() => {
+        console.log("Contact saved");
         toast.success("Contact saved");
       })
       .catch(() => {
@@ -58,6 +61,7 @@ export default function ContactForm() {
           type="tel"
           name="number"
           id={contactNumberId}
+
           // pattern="[0-9]{3}-[0-9]{2}-[0-9]{2}"
         />
         <p className={style.warning}>

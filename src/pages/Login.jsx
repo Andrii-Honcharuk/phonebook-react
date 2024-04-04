@@ -15,11 +15,6 @@ export default function Login() {
     <div>
       <PageTitle>Please log in</PageTitle>
       <LoginForm />
-      {/* {error && <p>Error Login or password</p>} */}
-
-      <p>
-        or <Link to="/register">register</Link>
-      </p>
     </div>
   );
 }

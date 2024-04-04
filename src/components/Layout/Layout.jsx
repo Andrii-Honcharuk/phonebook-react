@@ -1,6 +1,6 @@
 //Layout.jsx
 
-import { Toaster } from "react-hot-toast";
+// import { Toaster } from "react-hot-toast";
 
 import css from "./Layout.module.css";
 import AppBar from "../AppBar/AppBar";
@@ -10,7 +10,7 @@ export default function Layout({ children }) {
     <div className={css.container}>
       <AppBar />
       {children}
-      <Toaster position="top-right" reverseOrder={false} />
+      {/* <Toaster position="top-right" reverseOrder={false} /> */}
     </div>
   );
 }

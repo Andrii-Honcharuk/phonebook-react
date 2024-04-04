@@ -2,7 +2,7 @@
 
 import { Suspense, lazy, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-import { Toaster } from "react-hot-toast";
+// import { Toaster } from "react-hot-toast";
 import Layout from "../Layout/Layout";
 import { useDispatch, useSelector } from "react-redux";
 import { refreshUser } from "../../redux/auth/operations";
@@ -46,7 +46,7 @@ export default function App() {
           />
         </Routes>
       </Suspense>
-      <Toaster />
+      {/* <Toaster /> */}
     </Layout>
   );
 }
