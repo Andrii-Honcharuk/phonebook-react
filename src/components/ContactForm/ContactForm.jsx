@@ -4,7 +4,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { nanoid } from "nanoid";
 import * as Yup from "yup";
 
-import style from "./ContactForm.module.css";
+import css from "./ContactForm.module.css";
 import { useDispatch } from "react-redux";
 import { addContact } from "../../redux/contacts/operations";
 import toast from "react-hot-toast";
@@ -33,7 +33,7 @@ export default function ContactForm() {
         toast.success("Contact saved");
       })
       .catch(() => {
-        toast.success("Error, please reload page");
+        toast.error("Error, please reload page");
       });
     actions.resetForm();
   };
@@ -42,33 +42,35 @@ export default function ContactForm() {
   const contactNumberId = nanoid();
 
   return (
-    <Formik
-      initialValues={{
-        name: "",
-        number: "",
-      }}
-      validationSchema={ContactSchema}
-      onSubmit={handleSubmit}
-    >
-      <Form className={style.form}>
-        <label htmlFor={contactNameId}>Name</label>
-        <Field type="text" name="name" id={contactNameId}></Field>
-        <p className={style.warning}>
-          <ErrorMessage name="name" />
-        </p>
-        <label htmlFor={contactNumberId}>Number</label>
-        <Field
-          type="tel"
-          name="number"
-          id={contactNumberId}
+    <div className={css.addContactContainer}>
+      <Formik
+        initialValues={{
+          name: "",
+          number: "",
+        }}
+        validationSchema={ContactSchema}
+        onSubmit={handleSubmit}
+      >
+        <Form className={css.form}>
+          <label htmlFor={contactNameId}>Name</label>
+          <Field type="text" name="name" id={contactNameId}></Field>
+          <p className={css.warning}>
+            <ErrorMessage name="name" />
+          </p>
+          <label htmlFor={contactNumberId}>Number</label>
+          <Field
+            type="tel"
+            name="number"
+            id={contactNumberId}
 
-          // pattern="[0-9]{3}-[0-9]{2}-[0-9]{2}"
-        />
-        <p className={style.warning}>
-          <ErrorMessage name="number" />
-        </p>
-        <button type="submit">Add contact</button>
-      </Form>
-    </Formik>
+            // pattern="[0-9]{3}-[0-9]{2}-[0-9]{2}"
+          />
+          <p className={css.warning}>
+            <ErrorMessage name="number" />
+          </p>
+          <button type="submit">Add contact</button>
+        </Form>
+      </Formik>
+    </div>
   );
 }

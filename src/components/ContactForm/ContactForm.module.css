@@ -1,3 +1,9 @@
+.addContactContainer {
+  width: 320px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
 .form {
   display: flex;
   flex-direction: column;

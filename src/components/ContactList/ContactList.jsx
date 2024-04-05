@@ -5,14 +5,14 @@ import { selectFilteredContacts } from "../../redux/filters/selectors";
 
 import Contact from "../Contact/Contact";
 
-import style from "./ContactList.module.css";
+import css from "./ContactList.module.css";
 
 export default function ContactList() {
   const visibleContacts = useSelector(selectFilteredContacts);
 
   return (
-    <div>
-      <ul className={style.list}>
+    <div className={css.container}>
+      <ul className={css.list}>
         {visibleContacts.map((contact) => (
           <li key={contact.id}>
             <Contact data={contact} />

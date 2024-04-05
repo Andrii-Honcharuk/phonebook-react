@@ -1,9 +1,19 @@
-.form {
+.registrContainer {
+  margin-left: auto;
+  margin-right: auto;
   width: 320px;
+}
+
+.form {
+  width: 100%;
 }
 
 .label {
   display: flex;
   flex-direction: column;
   margin-bottom: 16px;
+}
+
+.btn {
+  width: 100%;
 }
