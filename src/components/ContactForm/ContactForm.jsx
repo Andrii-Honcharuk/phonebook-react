@@ -66,7 +66,9 @@ export default function ContactForm() {
           <p className={css.warning}>
             <ErrorMessage name="number" />
           </p>
-          <button type="submit">Add contact</button>
+          <button type="submit" className={css.btn}>
+            Add contact
+          </button>
         </Form>
       </Formik>
     </div>
