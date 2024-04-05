@@ -44,7 +44,6 @@ export const addContact = createAsyncThunk('contact/addContact', async (newConta
 //EDIT patch
 export const updateContact = createAsyncThunk('contact/updateContact', async({id, name, number} , thunkAPI) => {
   try {
-    console.log("update");
     const formatNumber = number.replace(/\D/g, "").replace(/(\d{1,3})(?=\d{3})/g,"$1-")
     const response = await axios.patch(`/contacts/${id}`,{name, number:formatNumber} );
     return response.data;

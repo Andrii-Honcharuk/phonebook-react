@@ -25,11 +25,9 @@ export default function ContactForm() {
   const dispatch = useDispatch();
   const handleSubmit = (values, actions) => {
     const formattedNumber = values.number.replace(/(\d{1,3})(?=\d{3})/g, "$1-");
-    // console.log(formattedNumber);
     dispatch(addContact({ name: values.name, number: formattedNumber }))
       .unwrap()
       .then(() => {
-        console.log("Contact saved");
         toast.success("Contact saved");
       })
       .catch(() => {

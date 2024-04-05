@@ -4,7 +4,7 @@ import { Formik, Form, Field } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { logIn } from "../../redux/auth/operations";
 import css from "./LoginForm.module.css";
-// import toast from "react-hot-toast";
+import toast from "react-hot-toast";
 import { selectAuthError } from "../../redux/auth/selectors";
 import { Link } from "react-router-dom";
 
@@ -13,16 +13,13 @@ export default function LoginForm() {
   const error = useSelector(selectAuthError);
 
   const handleSubmit = (values, actions) => {
-    console.log("LogIn");
     dispatch(logIn(values))
       .unwrap()
       .then(() => {
         actions.resetForm(); //
       })
       .catch(() => {
-        console.log("Toast ERROR");
-
-        // toast.error("Ooops... Error, please reload page");
+        toast.error("Ooops... Error, please reload page");
       });
   };
 

@@ -1,41 +1,21 @@
-/* .list {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-
-  gap: 16px;
-}
-
-.item {
-  max-width: 600px;
-  list-style: none;
-} */
 .container {
   margin-top: 12px;
+  text-align: center;
 }
 .list {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px; /* Проміжок між наклейками */
+  gap: 10px;
   padding: 0;
-  list-style-type: none; /* Видаляємо маркери списку */
+  list-style-type: none;
+  justify-content: center;
 }
 
-.list li {
-  background-color: #f0f0f0; /* Фоновий колір наклейки */
-  border: 1px solid #ccc; /* Окантовка */
-  border-radius: 5px; /* Закруглені кути */
-  padding: 10px; /* Відступи всередині наклейки */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Тінь */
-  width: 200px; /* Фіксована ширина наклейки */
-}
-
-.list li p {
-  margin: 0; /* Видаляємо зовнішні відступи у тексту */
-}
-
-/* Застосуємо стилі до іконок у контактах */
-.list li svg {
-  margin-right: 5px; /* Відступ між іконкою та текстом */
+.listItem {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  width: 200px;
 }

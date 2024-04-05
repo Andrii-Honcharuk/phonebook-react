@@ -21,7 +21,7 @@ export default function SearchBox() {
         className={css.input}
         type="text"
         name="filter"
-        placeholder="Search by name"
+        placeholder="Enter name or number"
         value={filterValue}
         onChange={handleChange}
       />

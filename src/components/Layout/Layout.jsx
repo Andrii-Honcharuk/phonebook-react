@@ -10,7 +10,6 @@ export default function Layout({ children }) {
     <div className={css.container}>
       <AppBar />
       {children}
-      {/* <Toaster position="top-right" reverseOrder={false} /> */}
     </div>
   );
 }

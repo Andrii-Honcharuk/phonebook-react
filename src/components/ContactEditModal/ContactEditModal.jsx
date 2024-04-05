@@ -25,17 +25,12 @@ export default function ContactEditModal({ initialValue, onClose }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log("handleChange ", name, value);
 
     setContact({ ...contact, [name]: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // const formattedNumber = contact.number.replace(
-    //   /(\d{1,3})(?=\d{3})/g,
-    //   "$1-"
-    // );
     dispatch(updateContact(contact))
       .unwrap()
       .then(() => {
@@ -76,7 +71,9 @@ export default function ContactEditModal({ initialValue, onClose }) {
             onChange={handleChange}
             id={contactNumberId}
           />
-          <button type="submit">Save</button>
+          <button type="submit" className={css.modalBtn}>
+            Save
+          </button>
         </form>
       </div>
     </div>

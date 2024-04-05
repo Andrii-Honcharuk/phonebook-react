@@ -24,7 +24,7 @@ export default function App() {
   }, [dispatch]);
 
   const isRefreshing = useSelector(selectIsRefreshing);
-  console.log("isRefreshing", isRefreshing);
+
   return isRefreshing ? (
     <Loader />
   ) : (
@@ -46,7 +46,6 @@ export default function App() {
           />
         </Routes>
       </Suspense>
-      {/* <Toaster /> */}
     </Layout>
   );
 }

@@ -27,10 +27,8 @@ const authSlice = createSlice({
       state.isLoggedIn = true;
     })
     .addCase(logIn.rejected, (state, action) => {
-      console.log("state.error", state.error);
-      console.log("action" ,action);
       state.error = action.error.message;
-      console.log("state.error2", state.error);
+
     })
     .addCase(logOut.fulfilled, (state) => {
       state.user = {

@@ -9,14 +9,12 @@ import { useState } from "react";
 import ContactEditModal from "../ContactEditModal/ContactEditModal";
 
 export default function Contact({ data }) {
-  console.log({ data });
   const [isEditing, setIsEditing] = useState(false);
   const dispatch = useDispatch();
   const handleDelete = (value) =>
     dispatch(deleteContact(value))
       .unwrap()
       .then(() => {
-        console.log("Contact Deleted");
         toast.success("Contact Deleted");
       })
       .catch(() => {
