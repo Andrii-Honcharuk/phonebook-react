@@ -33,6 +33,11 @@
   min-width: 120px;
   font-size: 14px;
 }
+
+.loginBtn:hover {
+  background-color: #0056b3;
+}
+
 .textRegister {
   text-align: center;
   text-decoration: underline;
