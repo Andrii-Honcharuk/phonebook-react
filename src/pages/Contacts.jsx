@@ -7,6 +7,7 @@ import PageTitle from "../components/PageTitle/PageTitle";
 import SearchBox from "../components/SearchBox/SearchBox";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  selectContacts,
   selectContactsError,
   selectContactsLoading,
 } from "../redux/contacts/selectors";
@@ -20,6 +21,8 @@ export default function Contacts() {
   const dispatch = useDispatch();
   const loading = useSelector(selectContactsLoading);
   const error = useSelector(selectContactsError);
+  const contacts = useSelector(selectContacts)
+  
 
   useEffect(() => {
     dispatch(fetchContacts())
@@ -35,7 +38,7 @@ export default function Contacts() {
     <>
       <PageTitle>Your contacts</PageTitle>
       <ContactForm />
-      <SearchBox />
+      {(contacts.length > 0) && <SearchBox />}
       {error && <p>Error loading</p>}
       {loading && <Loader />}
       <ContactList />

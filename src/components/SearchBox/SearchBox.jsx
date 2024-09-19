@@ -9,19 +9,19 @@ export default function SearchBox() {
   const dispatch = useDispatch();
 
   const filterValue = useSelector(selectNameFilter);
-
+console.log("filterValue",filterValue);
   function handleChange(e) {
     dispatch(filterContactsByName(e.target.value));
   }
 
   return (
     <div className={css.findContainer}>
-      <p className={css.label}>Find contacts by name or number</p>
+      <p className={css.label}>Find contacts by name or phone number</p>
       <input
         className={css.input}
         type="text"
         name="filter"
-        placeholder="Enter name or number"
+        placeholder="Enter name or phone number"
         value={filterValue}
         onChange={handleChange}
       />

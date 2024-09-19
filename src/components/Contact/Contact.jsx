@@ -37,9 +37,9 @@ export default function Contact({ data }) {
             <HiMiniUser />
             {data.name}
           </p>
-          <p className={css.text}>
+           <p className={css.text}>
             {" "}
-            <HiMiniPhone /> {data.number}
+            <HiMiniPhone /> {data.phone}
           </p>
         </div>
 
@@ -47,7 +47,7 @@ export default function Contact({ data }) {
           <button className={css.btn} onClick={() => setIsEditing(true)}>
             Edit
           </button>
-          <button className={css.btn} onClick={() => handleDelete(data.id)}>
+          <button className={css.btn} onClick={() => handleDelete(data._id)}>
             Delete
           </button>
         </div>

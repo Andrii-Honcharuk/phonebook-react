@@ -11,12 +11,12 @@ import toast from "react-hot-toast";
 
 const ContactSchema = Yup.object().shape({
   name: Yup.string()
-    .min(3, "Too Short!")
+    .min(3, "Too Short!").trim()
     .max(50, "Too Long!")
     .required("Required"),
-  number: Yup.string()
+  phone: Yup.string()
     .matches(/^[\d()-]+$/, "Invalid phone number format")
-    .min(3, "Too Short!")
+    .min(3, "Too Short!").trim()
     .max(50, "Too Long!")
     .required("Required"),
 });
@@ -24,8 +24,8 @@ const ContactSchema = Yup.object().shape({
 export default function ContactForm() {
   const dispatch = useDispatch();
   const handleSubmit = (values, actions) => {
-    const formattedNumber = values.number.replace(/(\d{1,3})(?=\d{3})/g, "$1-");
-    dispatch(addContact({ name: values.name, number: formattedNumber }))
+    const formattedPhone = values.phone.trim().replace(/(\d{1,3})(?=\d{3})/g, "$1-");
+    dispatch(addContact({ name: values.name.trim(), phone: formattedPhone }))
       .unwrap()
       .then(() => {
         toast.success("Contact saved");
@@ -37,14 +37,14 @@ export default function ContactForm() {
   };
 
   const contactNameId = nanoid();
-  const contactNumberId = nanoid();
+  const contactPhoneId = nanoid();
 
   return (
     <div className={css.addContactContainer}>
       <Formik
         initialValues={{
           name: "",
-          number: "",
+          phone: "",
         }}
         validationSchema={ContactSchema}
         onSubmit={handleSubmit}
@@ -55,16 +55,16 @@ export default function ContactForm() {
           <p className={css.warning}>
             <ErrorMessage name="name" />
           </p>
-          <label htmlFor={contactNumberId}>Number</label>
+          <label htmlFor={contactPhoneId}>Phone</label>
           <Field
             type="tel"
-            name="number"
-            id={contactNumberId}
+            name="phone"
+            id={contactPhoneId}
 
             // pattern="[0-9]{3}-[0-9]{2}-[0-9]{2}"
           />
           <p className={css.warning}>
-            <ErrorMessage name="number" />
+            <ErrorMessage name="phone" />
           </p>
           <button type="submit" className={css.btn}>
             Add contact

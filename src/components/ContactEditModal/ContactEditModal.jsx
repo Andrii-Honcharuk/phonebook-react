@@ -5,7 +5,7 @@
 //   return (
 //     <form>
 //       <input type="text" value={contact.name} />
-//       <input type="text" value={contact.number} />
+//       <input type="text" value={contact.phone} />
 //       <button type="submit">Save</button>
 //     </form>
 //   );
@@ -26,7 +26,7 @@ export default function ContactEditModal({ initialValue, onClose }) {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    setContact({ ...contact, [name]: value });
+    setContact({ ...contact, [name]: value.trim() });
   };
 
   const handleSubmit = (e) => {
@@ -40,7 +40,7 @@ export default function ContactEditModal({ initialValue, onClose }) {
   };
 
   const contactNameId = nanoid();
-  const contactNumberId = nanoid();
+  const contactPhoneId = nanoid();
 
   return (
     <div className={css.modal}>
@@ -57,19 +57,19 @@ export default function ContactEditModal({ initialValue, onClose }) {
             className={css.modalInput}
             type="text"
             name="name"
-            value={contact.name}
+            value={contact.name.trim()}
             onChange={handleChange}
           />
-          <label className={css.modalLabel} htmlFor={contactNumberId}>
-            Number:
+          <label className={css.modalLabel} htmlFor={contactPhoneId}>
+            Phone:
           </label>
           <input
             className={css.modalInput}
             type="text"
-            name="number"
-            value={contact.number}
+            name="phone"
+            value={contact.phone.trim()}
             onChange={handleChange}
-            id={contactNumberId}
+            id={contactPhoneId}
           />
           <button type="submit" className={css.modalBtn}>
             Save
