@@ -4,6 +4,20 @@ import axios from "axios";
 
 // axios.defaults.baseURL = "https://connections-api.herokuapp.com"
 axios.defaults.baseURL = "https://backendphonebook-u8kj.onrender.com/api";
+// axios.defaults.baseURL = "http://localhost:3000/api";
+
+//GET ALL
+export const fetchAllDbContacts = createAsyncThunk(
+  "contacts/fetchAllDbContacts",
+  async (_, thunkAPI) => {
+    try {
+      const response = await axios.get("contacts/admin");
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
 
 //GET
 export const fetchContacts = createAsyncThunk(
@@ -37,7 +51,7 @@ export const addContact = createAsyncThunk(
   async (newContact, thunkAPI) => {
     try {
       const response = await axios.post("/contacts", newContact);
-      console.log("response.data", response.data);
+
       return response.data.contact;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

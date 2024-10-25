@@ -6,6 +6,7 @@ import {
   deleteContact,
   fetchContacts,
   updateContact,
+  fetchAllDbContacts,
 } from "./operations";
 import { logOut } from "../auth/operations";
 
@@ -32,6 +33,21 @@ const slice = createSlice({
         state.loading = false;
         state.error = true;
       })
+
+      .addCase(fetchAllDbContacts.pending, (state) => {
+        state.error = null;
+        state.loading = true;
+      })
+      .addCase(fetchAllDbContacts.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.items = action.payload;
+      })
+      .addCase(fetchAllDbContacts.rejected, (state) => {
+        state.loading = false;
+        state.error = true;
+      })
+
       .addCase(deleteContact.pending, (state) => {
         state.error = null;
         state.loading = true;

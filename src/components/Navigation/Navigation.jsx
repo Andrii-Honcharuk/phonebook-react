@@ -9,6 +9,8 @@ const makeActiveClass = ({ isActive }) => {
   return `css.link ${isActive && css.isActive}`;
 };
 
+const isAdmin = false;
+
 export default function Navigation() {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   return (
@@ -19,6 +21,11 @@ export default function Navigation() {
       {isLoggedIn && (
         <NavLink className={makeActiveClass} to="/contacts">
           Contacts
+        </NavLink>
+      )}
+      {isAdmin && (
+        <NavLink className={makeActiveClass} to="/admin">
+          All Contacts in DB
         </NavLink>
       )}
     </nav>

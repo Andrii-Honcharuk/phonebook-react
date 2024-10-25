@@ -9,7 +9,6 @@ export default function SearchBox() {
   const dispatch = useDispatch();
 
   const filterValue = useSelector(selectNameFilter);
-console.log("filterValue",filterValue);
   function handleChange(e) {
     dispatch(filterContactsByName(e.target.value));
   }
