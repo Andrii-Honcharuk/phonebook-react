@@ -1,5 +1,3 @@
-//AppBar.jsx
-
 import {
   selectIsLoggedIn,
   selectIsRefreshing,

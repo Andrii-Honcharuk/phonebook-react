@@ -1,5 +1,3 @@
-//Navigation.jsx
-
 import { NavLink } from "react-router-dom";
 import css from "./Navigation.module.css";
 import { useSelector } from "react-redux";

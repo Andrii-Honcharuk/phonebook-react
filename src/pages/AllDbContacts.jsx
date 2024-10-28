@@ -1,5 +1,3 @@
-// pages/Contacts.jsx
-
 import toast, { Toaster } from "react-hot-toast";
 import ContactForm from "../components/ContactForm/ContactForm";
 import ContactList from "../components/ContactList/ContactList";

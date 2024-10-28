@@ -1,5 +1,3 @@
-// App.jsx
-
 import { Suspense, lazy, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import Layout from "../Layout/Layout";

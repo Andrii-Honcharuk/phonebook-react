@@ -1,6 +1,3 @@
-//pages/Home.jsx
-
-// import Loader from "../components/Loader/Loader";
 import PageTitle from "../components/PageTitle/PageTitle";
 
 export default function Home() {

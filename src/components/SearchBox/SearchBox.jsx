@@ -1,4 +1,3 @@
-//SearchBox.jsx
 import { useDispatch, useSelector } from "react-redux";
 
 import css from "./SearchBox.module.css";

@@ -1,13 +1,14 @@
-//RegistrationForm.jsx
-
 import { Formik, Form, Field } from "formik";
 
 import css from "./RegistrationForm.module.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { register } from "../../redux/auth/operations";
+import { selectIsLoading } from "../../redux/auth/selectors";
+import Loader from "../Loader/Loader";
 
 export default function RegistrationForm() {
   const dispatch = useDispatch();
+  const isLoading = useSelector(selectIsLoading);
 
   const handleSubmit = (values, actions) => {
     dispatch(register(values));
@@ -37,9 +38,10 @@ export default function RegistrationForm() {
             Password
             <Field type="password" name="password" />
           </label>
-          <button className={css.btn} type="submit">
-            Register
+          <button className={css.btn} type="submit" disabled={isLoading}>
+            {isLoading ? "Loading..." : "Register"}
           </button>
+          {isLoading && <Loader />}
         </Form>
       </Formik>
     </div>

@@ -1,5 +1,3 @@
-//ContactForm.jsx
-
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { nanoid } from "nanoid";
 import * as Yup from "yup";
@@ -11,12 +9,14 @@ import toast from "react-hot-toast";
 
 const ContactSchema = Yup.object().shape({
   name: Yup.string()
-    .min(3, "Too Short!").trim()
+    .min(3, "Too Short!")
+    .trim()
     .max(50, "Too Long!")
     .required("Required"),
   phone: Yup.string()
     .matches(/^[\d()-]+$/, "Invalid phone number format")
-    .min(3, "Too Short!").trim()
+    .min(3, "Too Short!")
+    .trim()
     .max(50, "Too Long!")
     .required("Required"),
 });
@@ -24,7 +24,9 @@ const ContactSchema = Yup.object().shape({
 export default function ContactForm() {
   const dispatch = useDispatch();
   const handleSubmit = (values, actions) => {
-    const formattedPhone = values.phone.trim().replace(/(\d{1,3})(?=\d{3})/g, "$1-");
+    const formattedPhone = values.phone
+      .trim()
+      .replace(/(\d{1,3})(?=\d{3})/g, "$1-");
     dispatch(addContact({ name: values.name.trim(), phone: formattedPhone }))
       .unwrap()
       .then(() => {

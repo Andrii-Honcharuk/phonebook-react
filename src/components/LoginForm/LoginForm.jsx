@@ -1,16 +1,16 @@
-//LoginForm.jsx
-
 import { Formik, Form, Field } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { logIn } from "../../redux/auth/operations";
 import css from "./LoginForm.module.css";
 import toast from "react-hot-toast";
-import { selectAuthError } from "../../redux/auth/selectors";
+import { selectAuthError, selectIsLoading } from "../../redux/auth/selectors";
 import { Link } from "react-router-dom";
+import Loader from "../Loader/Loader";
 
 export default function LoginForm() {
   const dispatch = useDispatch();
   const error = useSelector(selectAuthError);
+  const isLoading = useSelector(selectIsLoading);
 
   const handleSubmit = (values, actions) => {
     dispatch(logIn(values))
@@ -45,9 +45,10 @@ export default function LoginForm() {
             Error. The user name or password is incorrect
           </p>
         )}
-        <button type="submit" className={css.loginBtn}>
-          Log In
+        <button type="submit" className={css.loginBtn} disabled={isLoading}>
+          {isLoading ? "Loading..." : "Log In"}
         </button>
+        {isLoading && <Loader />}
         <div className={css.registerCont}>
           <p>or</p>
           <Link to="/register" className={css.textRegister}>

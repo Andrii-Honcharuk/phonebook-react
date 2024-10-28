@@ -1,5 +1,3 @@
-// pages/Contacts.jsx
-
 import toast, { Toaster } from "react-hot-toast";
 import ContactForm from "../components/ContactForm/ContactForm";
 import ContactList from "../components/ContactList/ContactList";
@@ -15,14 +13,11 @@ import { useEffect } from "react";
 import { fetchContacts } from "../redux/contacts/operations";
 import Loader from "../components/Loader/Loader";
 
-// import style from "./App.module.css";
-
 export default function Contacts() {
   const dispatch = useDispatch();
   const loading = useSelector(selectContactsLoading);
   const error = useSelector(selectContactsError);
-  const contacts = useSelector(selectContacts)
-  
+  const contacts = useSelector(selectContacts);
 
   useEffect(() => {
     dispatch(fetchContacts())
@@ -38,7 +33,7 @@ export default function Contacts() {
     <>
       <PageTitle>Your contacts</PageTitle>
       <ContactForm />
-      {(contacts.length > 0) && <SearchBox />}
+      {contacts.length > 0 && <SearchBox />}
       {error && <p>Error loading</p>}
       {loading && <Loader />}
       <ContactList />

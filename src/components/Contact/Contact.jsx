@@ -1,5 +1,3 @@
-//Contact.jsx;
-
 import { useDispatch } from "react-redux";
 import { deleteContact } from "../../redux/contacts/operations";
 import css from "./Contact.module.css";
@@ -37,7 +35,7 @@ export default function Contact({ data }) {
             <HiMiniUser />
             {data.name}
           </p>
-           <p className={css.text}>
+          <p className={css.text}>
             {" "}
             <HiMiniPhone /> {data.phone}
           </p>

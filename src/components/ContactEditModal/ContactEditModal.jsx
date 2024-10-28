@@ -1,16 +1,3 @@
-// import { useState } from "react";
-
-// export default function ContactEditModal({ initialValue }) {
-//   const [contact, setContacr] = useState(initialValue);
-//   return (
-//     <form>
-//       <input type="text" value={contact.name} />
-//       <input type="text" value={contact.phone} />
-//       <button type="submit">Save</button>
-//     </form>
-//   );
-// }
-
 import { useState } from "react";
 import css from "./ContactEditModal.module.css";
 import { useDispatch } from "react-redux";
