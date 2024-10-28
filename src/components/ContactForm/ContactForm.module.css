@@ -23,7 +23,16 @@
 .warning {
   font-size: 12px;
   color: red;
+  height: 16px;
+  visibility: hidden;
 }
+.warning:empty {
+  visibility: hidden;
+ }
+.warning:not(:empty) {
+  visibility: visible;
+ }
+ 
 .btn {
   padding: 10px 20px;
   background-color: #007bff;

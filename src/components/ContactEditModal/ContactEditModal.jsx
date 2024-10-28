@@ -1,67 +1,107 @@
-import { useState } from "react";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import css from "./ContactEditModal.module.css";
 import { useDispatch } from "react-redux";
 import { updateContact } from "../../redux/contacts/operations";
-import { nanoid } from "nanoid";
+import * as Yup from "yup";
 import toast from "react-hot-toast";
+import { useEffect } from "react";
+
+const ContactSchema = Yup.object().shape({
+  name: Yup.string()
+    .min(3, "Too Short!")
+    .trim()
+    .max(50, "Too Long!")
+    .required("Required"),
+  phone: Yup.string()
+    .matches(/^\+?(\d+[-()]?)*\d+$/, "Invalid phone number format")
+    .min(3, "Too Short!")
+    .trim()
+    .max(50, "Too Long!")
+    .required("Required"),
+});
 
 export default function ContactEditModal({ initialValue, onClose }) {
-  const [contact, setContact] = useState(initialValue);
-
   const dispatch = useDispatch();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    setContact({ ...contact, [name]: value.trim() });
+  const handleClose = () => {
+    onClose();
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(updateContact(contact))
-      .unwrap()
-      .then(() => {
-        onClose();
-        toast.success("Contact saved");
-      });
+  const handleKeyDown = (e) => {
+    if (e.key === "Escape") {
+      handleClose();
+    }
   };
 
-  const contactNameId = nanoid();
-  const contactPhoneId = nanoid();
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
+  const handleOverlayClick = (e) => {
+    if (e.target === e.currentTarget) {
+      handleClose();
+    }
+  };
 
   return (
-    <div className={css.modal}>
+    <div className={css.modal} onClick={handleOverlayClick}>
+      {" "}
       <div className={css.modalContent}>
-        <span className={css.close} onClick={onClose}>
+        <span className={css.close} onClick={handleClose}>
           &times;
         </span>
-        <form className={css.modalForm} onSubmit={handleSubmit}>
-          <label className={css.modalLabel} htmlFor={contactNameId}>
-            Name:
-          </label>
-          <input
-            id={contactNameId}
-            className={css.modalInput}
-            type="text"
-            name="name"
-            value={contact.name.trim()}
-            onChange={handleChange}
-          />
-          <label className={css.modalLabel} htmlFor={contactPhoneId}>
-            Phone:
-          </label>
-          <input
-            className={css.modalInput}
-            type="text"
-            name="phone"
-            value={contact.phone.trim()}
-            onChange={handleChange}
-            id={contactPhoneId}
-          />
-          <button type="submit" className={css.modalBtn}>
-            Save
-          </button>
-        </form>
+        <Formik
+          initialValues={{
+            _id: initialValue._id,
+            name: initialValue.name,
+            phone: initialValue.phone,
+          }}
+          validationSchema={ContactSchema}
+          onSubmit={(values, { resetForm }) => {
+            dispatch(updateContact(values))
+              .unwrap()
+              .then(() => {
+                handleClose();
+                toast.success("Contact saved");
+              })
+              .catch(() => {
+                toast.error("Failed to save contact");
+              });
+          }}
+        >
+          <Form className={css.modalForm}>
+            <label className={css.modalLabel} htmlFor="name">
+              Name:
+            </label>
+            <Field
+              id="name"
+              className={css.modalInput}
+              type="text"
+              name="name"
+            />
+            <p className={css.warning}>
+              <ErrorMessage name="name" />
+            </p>
+            <label className={css.modalLabel} htmlFor="phone">
+              Phone:
+            </label>
+            <Field
+              id="phone"
+              className={css.modalInput}
+              type="text"
+              name="phone"
+            />
+            <p className={css.warning}>
+              <ErrorMessage name="phone" />
+            </p>
+            <button type="submit" className={css.modalBtn}>
+              Save
+            </button>
+          </Form>
+        </Formik>
       </div>
     </div>
   );
